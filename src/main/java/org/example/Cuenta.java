@@ -54,6 +54,15 @@ public class Cuenta {
          * a la cuenta*/
         numeroConsignacion=numeroConsignacion+1;
     }
+    /**
+     * Método para consignar una cantidad de dinero en la cuenta.
+     * Actualiza el saldo de la cuenta y el número de consignaciones.
+     * @param cantidad La cantidad de dinero a consignar.
+     */
+    public void consignar(float cantidad) {
+        saldo += cantidad;
+        numeroConsignacion++;
+    }
 
     /*Metodo que recibe una cantidad de dinero
      * a retirar y actualizar su saldo disponile y el valor a retirar

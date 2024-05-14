@@ -1,65 +1,74 @@
 package org.example;
-public class CuentaAhorros extends Cuenta {
-    /* Atributo que identifica si una cuenta está activa;
-     * la cuenta está activa si su saldo es mayor a 10$ */
-    private boolean estado;
 
-    /* Constructor de la clase cuenta Ahorros
-     * @param saldo, parametro que define el saldo de la cuenta
-     * @param tasa Parametro que define la tasa anual */
+/*
+ * Clase que representa una cuenta de ahorros bancaria, que hereda de la clase Cuenta.
+ * Además de los atributos y métodos heredados, incluye un atributo para determinar si la cuenta está activa.
+ */
+public class CuentaAhorros extends Cuenta {
+    /** Indica si la cuenta de ahorros está activa. */
+    private boolean activa;
+
+    /*
+     * Constructor para crear una nueva cuenta de ahorros.
+     * @param saldo El saldo inicial de la cuenta.
+     * @param tasaAnual La tasa de interés anual de la cuenta en porcentaje.
+     */
     public CuentaAhorros(float saldo, float tasaAnual) {
         super(saldo, tasaAnual);
+        this.activa = saldo > 10;
+    }
 
-        // Condicional para saber si la cuenta se encuentra activa o inactiva
-        if (saldo <= 10) {
-            // Se desactiva la cuenta
-            estado = false;
+    /*
+     * Método para consignar una cantidad de dinero en la cuenta de ahorros.
+     * Se puede consignar dinero si la cuenta está activa.
+     * @param cantidad La cantidad de dinero a consignar.
+     */
+    @Override
+    public void consignar(float cantidad) {
+        if (activa) {
+            super.consignar(cantidad);
         } else {
-            estado = true;
+            System.out.println("No se puede consignar en una cuenta inactiva.");
         }
     }
 
-    /* Método que recibe una cantidad de dinero a retirar
-     * y actualizar el estado de la cuenta
-     * @param cantidad, parametro que define la cantidad a retirar
-     * de una cuenta de ahorros */
+    /*
+     * Método para retirar una cantidad de dinero de la cuenta de ahorros.
+     * Se puede retirar dinero si la cuenta está activa y se invoca al método heredado de la clase padre.
+     * @param cantidad La cantidad de dinero a retirar.
+     */
     @Override
     public void retirar(float cantidad) {
-        // Si la cuenta está activa, se realiza el retiro
-        if (estado) {
-            // Invocamos el método retirar de la clase padre
+        if (activa) {
             super.retirar(cantidad);
+        } else {
+            System.out.println("No se puede retirar de una cuenta inactiva.");
         }
     }
 
-    /* Método que genera un extracto mensual de la cuenta de ahorros
-     * Verifica si el número de retiros es mayor a 4 y cobra 1 dólar por cada retiro adicional */
+    /*
+     * Método para generar el extracto mensual de la cuenta de ahorros.
+     * Si el número de retiros es mayor que 4, se cobra 1 dólar por cada retiro adicional.
+     * Además, se determina si la cuenta está activa después del extracto.
+     */
     @Override
     public void extractoMensual() {
-        // Verifica si el número de retiros es mayor a 4
-        if (getNumeroRetiro() > 4) {
-            // Cobra 1 dólar por cada retiro adicional
-            super.retirar((getNumeroRetiro() - 4) * 1);
-        }
-        // Actualiza el saldo aplicando la comisión mensual y calculando el interés mensual
         super.extractoMensual();
-        // Verifica si la cuenta sigue activa después del extracto
-        if (getSaldo() <= 10) {
-            estado = false;
-        } else {
-            estado = true;
+        if (getNumeroRetiro() > 4) {
+            float comision = (getNumeroRetiro() - 4) * 1;
+            super.retirar(comision);
         }
+        activa = getSaldo() > 10;
     }
 
-    /* Método que imprime en pantalla el saldo de la cuenta,
-     * la comisión mensual y el número de transacciones realizadas */
+    /*
+     * Método para imprimir información detallada de la cuenta de ahorros.
+     * Muestra el saldo, la comisión mensual, el número de transacciones realizadas y el estado de la cuenta.
+     */
     public void imprimir() {
         System.out.println("Saldo: " + getSaldo());
         System.out.println("Comisión Mensual: " + getComisionMensual());
-        System.out.println("Estado de la cuenta: " + (estado ? "Activa" : "Inactiva"));
-
-        System.out.println("Número de transacciones realizadas: " + (getNumeroConsignacion() + getNumeroRetiro()));
+        System.out.println("Número de Transacciones Realizadas: " + (getNumeroConsignacion() + getNumeroRetiro()));
+        System.out.println("Estado de la Cuenta: " + (activa ? "Activa" : "Inactiva"));
     }
 }
-
-
