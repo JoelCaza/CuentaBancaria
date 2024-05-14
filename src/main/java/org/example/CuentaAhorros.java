@@ -39,7 +39,7 @@ public class CuentaAhorros extends Cuenta {
         // Verifica si el número de retiros es mayor a 4
         if (getNumeroRetiro() > 4) {
             // Cobra 1 dólar por cada retiro adicional
-            super.retirar((getNumeroRetiro() - 4) * 1);
+            super.retirar((getNumeroRetiro()) - 1);
         }
         // Actualiza el saldo aplicando la comisión mensual y calculando el interés mensual
         super.extractoMensual();
