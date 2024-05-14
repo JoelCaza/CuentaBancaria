@@ -95,6 +95,8 @@ public class Cuenta {
 
     }
 
+
+
     public float getSaldo() {
         return saldo;
     }
@@ -113,5 +115,10 @@ public class Cuenta {
 
     public float getComisionMensual() {
         return comisionMensual;
+    }
+    public void imprimir() {
+        System.out.println("Saldo: " + saldo);
+        System.out.println("Comisión Mensual: " + comisionMensual);
+        System.out.println("Número de transacciones realizadas: " + (numeroConsignacion + numeroRetiro));
     }
 }

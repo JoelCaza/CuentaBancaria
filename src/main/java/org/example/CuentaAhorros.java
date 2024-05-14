@@ -56,6 +56,7 @@ public class CuentaAhorros extends Cuenta {
     public void imprimir() {
         System.out.println("Saldo: " + getSaldo());
         System.out.println("Comisión Mensual: " + getComisionMensual());
+        System.out.println("Estado de la cuenta: " + (estado ? "Activa" : "Inactiva"));
 
         System.out.println("Número de transacciones realizadas: " + (getNumeroConsignacion() + getNumeroRetiro()));
     }
