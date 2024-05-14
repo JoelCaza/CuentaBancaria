@@ -1,37 +1,78 @@
 package org.example;
+import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String[] args){
+                public static void main(String[] args) {
+                        Scanner scanner = new Scanner(System.in);
 
-            // Crear una cuenta corriente con un saldo inicial de 1000 y una tasa anual del 5%
-            CuentaCorriente cuentaCorriente = new CuentaCorriente(50, 12);
+                        // Pedir al usuario que ingrese el saldo inicial y la tasa anual para la cuenta corriente
+                        System.out.println("Ingrese el saldo inicial de la cuenta corriente:");
+                        float saldoCorriente = scanner.nextFloat();
+                        System.out.println("Ingrese la tasa anual de la cuenta corriente:");
+                        float tasaCorriente = scanner.nextFloat();
 
-            // Crear una cuenta de ahorros con un saldo inicial de 500 y una tasa anual del 3%
-            CuentaAhorros cuentaAhorros = new CuentaAhorros(500, 12);
+                        // Crear una cuenta corriente con los valores proporcionados por el usuario
+                        CuentaCorriente cuentaCorriente = new CuentaCorriente(saldoCorriente, tasaCorriente);
 
-            // Realizar algunas operaciones en las cuentas
-            cuentaCorriente.depositar(500); // Depositar 500 en la cuenta corriente
-            cuentaCorriente.retirar(200);   // Retirar 200 de la cuenta corriente
-            cuentaCorriente.retirar(200);
-            cuentaCorriente.retirar(200);
-            cuentaCorriente.extractoMensual(); // Generar extracto mensual de la cuenta corriente
+                        // Pedir al usuario que ingrese el saldo inicial y la tasa anual para la cuenta de ahorros
+                        System.out.println("Ingrese el saldo inicial de la cuenta de ahorros:");
+                        float saldoAhorros = scanner.nextFloat();
+                        System.out.println("Ingrese la tasa anual de la cuenta de ahorros:");
+                        float tasaAhorros = scanner.nextFloat();
 
-            cuentaAhorros.depositar(300);   // Depositar 300 en la cuenta de ahorros
-            cuentaAhorros.retirar(100);    // Retirar 100 de la cuenta de ahorros
-            cuentaAhorros.retirar(50);
-            cuentaAhorros.retirar(50);
-            cuentaAhorros.retirar(50);
-            cuentaAhorros.retirar(50);
+                        // Crear una cuenta de ahorros con los valores proporcionados por el usuario
+                        CuentaAhorros cuentaAhorros = new CuentaAhorros(saldoAhorros, tasaAhorros);
 
-            cuentaAhorros.extractoMensual(); // Generar extracto mensual de la cuenta de ahorros
+                        // Realizar operaciones en las cuentas basadas en la entrada del usuario
+                        System.out.println("Operaciones en la cuenta corriente:");
+                        realizarOperaciones(cuentaCorriente, scanner);
 
-            // Imprimir la información de las cuentas
-            System.out.println("Información de la cuenta corriente:");
-            cuentaCorriente.imprimir();
-            System.out.println();
+                        System.out.println("Operaciones en la cuenta de ahorros:");
+                        realizarOperaciones(cuentaAhorros, scanner);
 
-            System.out.println("Información de la cuenta de ahorros:");
-            cuentaAhorros.imprimir();
+                        // Generar extractos mensuales para ambas cuentas
+                        cuentaCorriente.extractoMensual();
+                        cuentaAhorros.extractoMensual();
+
+                        // Imprimir la información de las cuentas
+                        System.out.println("Información de la cuenta corriente:");
+                        cuentaCorriente.imprimir();
+                        System.out.println();
+
+                        System.out.println("Información de la cuenta de ahorros:");
+                        cuentaAhorros.imprimir();
+
+                        // Cerrar el Scanner
+                        scanner.close();
+                }
+
+                private static void realizarOperaciones(Cuenta cuenta, Scanner scanner) {
+                        boolean continuar = true;
+                        while (continuar) {
+                                System.out.println("Elija una operación:");
+                                System.out.println("1. Depositar");
+                                System.out.println("2. Retirar");
+                                System.out.println("3. Salir");
+
+                                int opcion = scanner.nextInt();
+                                switch (opcion) {
+                                        case 1:
+                                                System.out.println("Ingrese la cantidad a depositar:");
+                                                float cantidadDepositar = scanner.nextFloat();
+                                                cuenta.depositar(cantidadDepositar);
+                                                break;
+                                        case 2:
+                                                System.out.println("Ingrese la cantidad a retirar:");
+                                                float cantidadRetirar = scanner.nextFloat();
+                                                cuenta.retirar(cantidadRetirar);
+                                                break;
+                                        case 3:
+                                                continuar = false;
+                                                break;
+                                        default:
+                                                System.out.println("Opción inválida. Por favor, elija una opción válida.");
+                                }
+                        }
+                }
         }
-    }
