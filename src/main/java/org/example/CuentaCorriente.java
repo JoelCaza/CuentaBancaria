@@ -1,13 +1,13 @@
 package org.example;
 
-/**
+/*
  * Esta clase representa una cuenta corriente que es una subclase de la clase Cuenta.
  * La cuenta corriente permite el uso de sobregiro, donde se puede retirar más dinero del saldo actual.
  */
 public class CuentaCorriente extends Cuenta {
     private float sobregiro = 0; // Saldo negativo permitido como sobregiro
 
-    /**
+    /*
      * Constructor de la clase CuentaCorriente.
      *
      * @param saldo     El saldo inicial de la cuenta corriente.
@@ -17,7 +17,7 @@ public class CuentaCorriente extends Cuenta {
         super(saldo, tasaAnual); // Llama al constructor de la clase base (Cuenta)
     }
 
-    /**
+    /*
      * Permite retirar dinero de la cuenta corriente, permitiendo el uso de sobregiro si es necesario.
      *
      * @param cantidad La cantidad de dinero a retirar.
@@ -33,7 +33,7 @@ public class CuentaCorriente extends Cuenta {
         }
     }
 
-    /**
+    /*
      * Permite depositar dinero en la cuenta corriente.
      * Si hay sobregiro, los depósitos primero se usan para cubrir el sobregiro antes de aumentar el saldo.
      *
@@ -54,7 +54,7 @@ public class CuentaCorriente extends Cuenta {
         }
     }
 
-    /**
+    /*
      * Genera el extracto mensual de la cuenta corriente.
      * Además, muestra el sobregiro si lo hay.
      */
@@ -67,7 +67,7 @@ public class CuentaCorriente extends Cuenta {
         }
     }
 
-    /**
+    /*
      * Imprime la información de la cuenta corriente, incluyendo saldo, comisión mensual, número de transacciones y sobregiro (si lo hay).
      */
     public void imprimir() {
