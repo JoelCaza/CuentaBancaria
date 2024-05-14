@@ -1,6 +1,12 @@
 package org.example;
 import java.util.Scanner;
 
+
+/*
+* Autor:Joel Caza
+* Materia:lenguajes de Programacion 2
+* Fecha: 13/05/2024
+* */
 public class Main {
         public static void main(String[] args) {
                 Scanner scanner = new Scanner(System.in);
